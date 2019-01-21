@@ -74,14 +74,37 @@ var comments = [
 
 function getCurrentPostComments ( postId ) {
     var res = [];
-    for (i = 0; i < comments.length; i++) {
-        if (comments[i].postId == postId) {
-            for (j = 0; j < users.length; j++ ) {
-                if(comments[i].author == users[j].userId) {
-                    res.push({
-                        author: users[j].name,
-                        text: comments[i].text
-                    });
+
+    // using just FOR
+
+    // for (i = 0; i < comments.length; i++) {
+    //     if (comments[i].postId == postId) {
+    //         for (j = 0; j < users.length; j++ ) {
+    //             if(comments[i].author == users[j].userId) {
+    //                 res.push({
+    //                     author: users[j].name,
+    //                     text: comments[i].text
+    //                 });
+    //             }
+    //         }
+    //     }
+    // }
+
+
+    // using FOR OF & FOR IN
+
+    for (var i of comments) {
+        for (var j in i) {
+            if (i[j] == postId) {
+                for (var k of users) {
+                    for (var f in k) {
+                        if (k[f] == i.author) {
+                            res.push({
+                                name: k.name,
+                                text: i.text
+                            })
+                        }
+                    }
                 }
             }
         }
